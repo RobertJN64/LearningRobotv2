@@ -4,6 +4,7 @@ from os import getcwd
 import multiprocessing
 from multiprocessing import Manager
 import PythonExecutor
+from time import sleep
 #import json
 
 #TODO - swap app.run() and filepath in PythonExecutor
@@ -161,6 +162,9 @@ def stopScript():
         process.terminate()
         with open("userscripts/printlog.txt", "a") as file:
             file.write("---SCRIPT STOPPED---\n")
+    sleep(0.1)
+    import motoroff
+    motoroff.none()
     return "Code stopped."
 #endregion
 

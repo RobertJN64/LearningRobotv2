@@ -36,8 +36,7 @@ def runUserScript(tb):
         #code.main(eh)
         with open("userscripts/printlog.txt", "a") as f:
             f.write("---SCRIPT FINISHED---\n")
-        sleep(0.1)
-        import motoroff
+
     except ImportError:
         trace = traceback.format_exc()
         traces = trace.split('\n')
@@ -57,7 +56,9 @@ def runUserScript(tb):
         trace = traceback.format_exc()
         tb.append(formatTraceback(trace))
         print(tb[0])
-
+    sleep(0.1)
+    import motoroff
+    motoroff.none()
 
 def upload_file(app, request):
     # check if the post request has the file part
