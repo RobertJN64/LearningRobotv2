@@ -1,6 +1,4 @@
 from RobotTools import printlog as print
 from time import sleep
+import explorerhat as robot
 
-for number in range(0, 51):
-    if number % 5 == 0:
-        print(number)

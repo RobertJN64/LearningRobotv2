@@ -5,6 +5,8 @@ import multiprocessing
 import PythonExecutor
 #import json
 
+#TODO - swap app.run() and filepath in PythonExecutor
+
 UPLOAD_FOLDER = getcwd() + '/userscripts/'
 
 app = flask.Flask(__name__)
@@ -162,5 +164,6 @@ def stopScript():
 #endregion
 
 def startFlask():
-    app.run(host="0.0.0.0", port=80, ssl_context=('cert.pem', 'key.pem'))
+    app.run()
+    #app.run(host="0.0.0.0", port=80 ssl_context=('cert.pem', 'key.pem'))
 

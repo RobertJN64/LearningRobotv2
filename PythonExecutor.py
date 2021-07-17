@@ -14,7 +14,8 @@ def formatTraceback(tb):
     traces.pop(1)
     traces.pop(1)
     trace = '\n'.join(traces)
-    directory = getcwd() + '/userscripts/UserScript.py'
+    #directory = getcwd() + '/userscripts/UserScript.py'
+    directory = getcwd() + '\\userscripts\\UserScript.py'
     trace = trace.replace(directory, "User_Submitted_Code")
     return trace
 
