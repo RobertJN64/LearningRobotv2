@@ -1,13 +1,12 @@
 import warnings
 import threading
-from robot import Robot, KillFlagException
 import json
-
 
 #for custom blockly
 import random
 import math
 from numbers import Number
+from time import sleep
 
 #region CleanHTML
 with open("replacements.txt") as f:
@@ -29,10 +28,60 @@ def load_config():
     with open("config.json") as file:
         config = json.load(file)
 load_config()
+
+def restore_config():
+    global config
+    with open("config_orig.json") as file:
+        config = json.load(file)
+    with open("config.json", "w+") as file:
+        json.dump(config, file)
+
+def setconfig(key, value):
+    global config
+    config[key] = value
+    with open("config.json", "w+") as file:
+        json.dump(config, file)
+
+def configUI(reqtype, reqdir):
+    global config
+    if reqtype == "forward":
+        if reqdir == 1:
+            config["lmotor_speed"] += 1
+            config["rmotor_speed"] -= 1
+        elif reqdir == -1:
+            config["lmotor_speed"] -= 1
+            config["rmotor_speed"] += 1
+    else:
+        if reqdir == 1:
+            config["turn_time"] += 0.02
+        elif reqdir == -1:
+            config["turn_time"] -= 0.02
+
+    config["rmotor_speed"] = round(config["rmotor_speed"])
+    config["lmotor_speed"] = round(config["lmotor_speed"])
+    config["turn_time"] = round(config["turn_time"], 2)
+
+    with open("config.json", "w+") as file:
+        json.dump(config, file)
 #endregion
+
+
+def start_action_thread(reqtype):
+    global config
+    from robot import Robot
+    nokill = {"kill": False}
+    r = Robot(nokill, config)
+    if reqtype == "forward":
+        r.moveFD(10)
+    else:
+        r.left(90)
+    sleep(0.25)
+    r.stop() #technically unecessary, but why not
+
 
 robot = None
 def code_executor(code, killflag):
+    from robot import Robot, KillFlagException
     global robot
     global config
     killflag["kill"] = False
@@ -106,7 +155,6 @@ def runCode(request, killflag):
 
 def runALlCMDS():
     #so import isn't mad at us
-    Robot({}, {})
 
     #more import junk
     x = random.randint(0,1)

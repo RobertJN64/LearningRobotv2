@@ -53,6 +53,11 @@
           $.get(url, {"type": reqtype, "dir": dir}, function(data) { console.log(data) })
         }
 
+        function getTraceback() {
+          $.get('/traceback', {}, function(data) { if (data == "Blockly was started on the robot. Please reboot to use full functionality.") {alert(data)}})
+        }
+        getTraceback()
+
     </script>
 </body>
 </html>

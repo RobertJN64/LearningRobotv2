@@ -146,10 +146,12 @@
 
     function getTraceback() {
       $.get('/traceback', {}, function(data) {
-      if (data != "") {
+      if (data != "") {      
+      if (data != "Blockly was started on the robot. Please reboot to use full functionality.") {
       document.getElementById("traceback").value = data
-      alert(data)
-      }
+      alert(data) }
+      else { if (document.getElementById('traceback').value == "") {document.getElementById('traceback').value = data}}      
+}
     })
     }
 
