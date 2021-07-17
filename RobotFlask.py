@@ -2,6 +2,7 @@ import flask
 from flask import request, jsonify, render_template
 from os import getcwd
 import multiprocessing
+from multiprocessing import Manager
 import PythonExecutor
 #import json
 
@@ -12,8 +13,8 @@ UPLOAD_FOLDER = getcwd() + '/userscripts/'
 app = flask.Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
-killflag = {"kill": False}
+killflag = Manager().dict()
+killflag["kill"] = False
 process: multiprocessing.Process = None
 lastTB = []
 blocklyActive = False
@@ -44,7 +45,7 @@ def stop():
 def runBlocklyCode():
     import Blockly
     global blocklyActive
-    blocklyActive = True
+    #blocklyActive = True
     Blockly.runCode(request, killflag)
     return jsonify(success=True)
 

@@ -1,5 +1,5 @@
 import warnings
-import threading
+import multiprocessing
 import json
 
 #for custom blockly
@@ -79,10 +79,8 @@ def start_action_thread(reqtype):
     r.stop() #technically unecessary, but why not
 
 
-robot = None
 def code_executor(code, killflag):
     from robot import Robot, KillFlagException
-    global robot
     global config
     killflag["kill"] = False
     robot = Robot(killflag, config)
@@ -150,7 +148,7 @@ def runCode(request, killflag):
 
     code = '\n'.join(code)
 
-    t = threading.Thread(target=code_executor, args=(code,killflag,))
+    t = multiprocessing.Process(target=code_executor, args=(code,killflag,))
     t.start()
 
 def runALlCMDS():
