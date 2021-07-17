@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Robot Calibration</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/stylesheet.css">
+    <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <style>
+        .roundedDiv {
+          border-color: white;
+          border-radius: 5px;
+          border-style: solid;
+          padding: 5px;
+          margin: 5px;
+          display: inline-block;
+        }
+
+        h2 {
+          text-align: center;
+        }
+
+        p {
+          text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center">Use the buttons below to calibrate driving straight and turning:</h1>
+    <div class="roundedDiv" style="width: 45%; display: inline-block;">
+        <h2>Driving Calibration</h2>
+        <p>Hit the button below. Watch if the robot turns to the left or to the right.</p>
+        <p><button onclick="makeRequest('/calib_action', 'forward', '0')" style="background-color: green" class="nice_button">Drive Forward</button></p>
+        <p>Hit the button that indicates the direction the robot curved.
+        If the robot went straight, you are done! If not, drive it again.</p>
+        <p><button onclick="makeRequest('/calib_response', 'forward', '-1') " style="background-color: blue" class="nice_button"><- LEFT</button>
+        <button onclick="makeRequest('/calib_response', 'forward', '1')" style="background-color: blue" class="nice_button">RIGHT -></button></p>
+    </div>
+    <div class="roundedDiv" style="float: right; width: 45%; display: inline-block;" >
+        <h2>Turning Calibration</h2>
+        <p>Hit the button below. Watch if the robot turns more or less than a right angle.</p>
+        <p><button onclick="makeRequest('/calib_action', 'turn', '0')" style="background-color: green" class="nice_button">Turn 90 Degrees</button></p>
+        <p>Hit the button that indicates if the robot turned far enough or not.
+        If the robot turned a 90 degree angle, you are done! If not, run it again.</p>
+        <p><button onclick="makeRequest('/calib_response', 'turn', '-1')" style="background-color: blue" class="nice_button">DECREASE TURN</button>
+        <button onclick="makeRequest('/calib_response', 'turn', '1')" style="background-color: blue" class="nice_button">INCREASE TURN</button></p>
+    </div>
+
+    <script>
+        function makeRequest(url, reqtype, dir) {
+          $.get(url, {"type": reqtype, "dir": dir}, function(data) { console.log(data) })
+        }
+
+    </script>
+</body>
+</html>

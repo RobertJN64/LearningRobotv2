@@ -1,13 +1,15 @@
 #TODO - replace all of this code
 import time
+import cmath
 
 class KillFlagException(Exception):
     pass
 
 
 class Robot:
-    def __init__(self, killflag):
+    def __init__(self, killflag, config):
         self.killflag = killflag
+        self.config = config
 
     def moveFD(self, dis):
         print("[MOVE CMD] Move fd command not yet implemented!" + " Called with: " + str(dis))

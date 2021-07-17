@@ -3,6 +3,7 @@ import threading
 from robot import Robot, KillFlagException
 import json
 
+
 #for custom blockly
 import random
 import math
@@ -27,6 +28,7 @@ def load_config():
     global config
     with open("config.json") as file:
         config = json.load(file)
+load_config()
 #endregion
 
 robot = None
@@ -34,7 +36,7 @@ def code_executor(code, killflag):
     global robot
     global config
     killflag["kill"] = False
-    robot = Robot(killflag)
+    robot = Robot(killflag, config)
     print("++++EXEC++++")
     try:
         exec(code)
@@ -104,7 +106,7 @@ def runCode(request, killflag):
 
 def runALlCMDS():
     #so import isn't mad at us
-    Robot({})
+    Robot({}, {})
 
     #more import junk
     x = random.randint(0,1)
