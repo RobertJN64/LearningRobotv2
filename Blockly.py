@@ -78,10 +78,11 @@ def start_action_thread(reqtype):
     sleep(0.25)
     r.stop() #technically unecessary, but why not
 
-
+robot = None
 def code_executor(code, killflag):
     from robot import Robot, KillFlagException
     global config
+    global robot #makes function definitions easier because it forces robot into global scope
     killflag["kill"] = False
     robot = Robot(killflag, config)
     print("++++EXEC++++")
