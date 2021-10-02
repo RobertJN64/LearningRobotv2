@@ -1,6 +1,5 @@
 #TODO - replace all of this code
 import time
-import cmath
 
 class KillFlagException(Exception):
     pass
