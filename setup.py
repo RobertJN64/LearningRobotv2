@@ -71,10 +71,12 @@ def install():
         from crontab import CronTab
         cron = CronTab(user='pi')  # current users cron
         directory = '/home/pi/Desktop/LearningRobotv2/'
-        command = '@reboot cd ' + directory +' && sudo python 3 main.py > ' + directory + 'logs.txt 2>&1'
-        cron.new(command='@reboot sudo mv ' + directory + 'logs.txt ' + directory + 'logsold.txt',
+        command = 'cd ' + directory +' && sudo python 3 main.py > ' + directory + 'logs.txt 2>&1'
+        job = cron.new(command='sudo mv ' + directory + 'logs.txt ' + directory + 'logsold.txt',
                  comment='Backup 2 versions of log files.')
-        cron.new(command=command, comment='Run Robot Script')
+        job.every_reboot()
+        job = cron.new(command=command, comment='Run Robot Script')
+        job.every_reboot()
         cron.write() #save crontab
 
     except ImportError:
