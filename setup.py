@@ -54,7 +54,7 @@ def install():
     with open("/etc/hostapd/hostapd.conf", "w+") as f:
         f.write("country_code=US" + '\n')
         f.write("interface=wlan0" + '\n')
-        f.write("ssid" + wifiname + '\n')
+        f.write("ssid=" + wifiname + '\n')
         f.write("hw_mode=g" + '\n')
         f.write("channel=7" + '\n')
         f.write("macaddr_acl=0" + '\n')
@@ -72,7 +72,7 @@ def install():
         cron = CronTab(user='pi')  # current users cron
         directory = '/home/pi/Desktop/LearningRobotv2/'
         command = '@reboot cd ' + directory +' && sudo python 3 main.py > ' + directory + 'logs.txt 2>&1'
-        cron.new(command='@ reboot sudo mv ' + directory + 'logs.txt ' + directory + 'logsold.txt',
+        cron.new(command='@reboot sudo mv ' + directory + 'logs.txt ' + directory + 'logsold.txt',
                  comment='Backup 2 versions of log files.')
         cron.new(command=command, comment='Run Robot Script')
         cron.write() #save crontab
