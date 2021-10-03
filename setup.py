@@ -67,13 +67,15 @@ def install():
         f.write("rsn_pairwise=CCMP" + '\n')
 
     try:
+        print("Editing crontab")
         from crontab import CronTab
-        cron = CronTab(tabfile='/etc/crontab', user=True)  # current users cron
+        cron = CronTab()  # current users cron
         directory = '/home/pi/Desktop/LearningRobotv2/'
         command = '@reboot cd ' + directory +' sudo python 3 main.py > ' + directory + 'logs.txt 2>&1'
         cron.new(command='sudo mv ' + directory + 'logs.txt ' + directory + 'logsold.txt',
                  comment='Backup 2 versions of log files.')
         cron.new(command=command, comment='Run Robot Script')
+        cron.write_to_user() #save crontab
 
     except ImportError:
         print("ERROR: Crontab module not found. Crontab is necessary and should have been",
