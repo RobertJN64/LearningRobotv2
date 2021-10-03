@@ -10,6 +10,12 @@ def install():
     print("Installing crontab lib")
     os.system("sudo pip install python-crontab")
 
+    print("Installing explorerhat lib")
+    os.system("sudo apt-get install python3-explorerhat")
+
+    print("Installing flask")
+    os.system("sudo pip install flask")
+
     print("Installing hostapd")
     os.system('sudo apt install hostapd')
 
