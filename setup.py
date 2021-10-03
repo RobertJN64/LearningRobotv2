@@ -8,7 +8,10 @@ def install():
         return
 
     print("Installing crontab lib")
-    os.system("sudo pip install python-crontab")
+    os.system("sudo pip3 install python-crontab")
+
+    print("Enabling i2c")
+    os.system("sudo raspi-config nonint do_i2c 0")
 
     print("Installing explorerhat lib")
     os.system("sudo apt-get install python3-explorerhat")
