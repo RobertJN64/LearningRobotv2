@@ -71,8 +71,8 @@ def install():
         from crontab import CronTab
         cron = CronTab(user='pi')  # current users cron
         directory = '/home/pi/Desktop/LearningRobotv2/'
-        command = 'cd ' + directory +' && sudo python 3 main.py > ' + directory + 'logs.txt 2>&1'
-        job = cron.new(command='sudo mv ' + directory + 'logs.txt ' + directory + 'logsold.txt',
+        command = 'cd ' + directory +' && sudo python3 main.py > ' + directory + 'logs.txt 2>&1'
+        job = cron.new(command='sudo cp ' + directory + 'logs.txt ' + directory + 'logsold.txt',
                  comment='Backup 2 versions of log files.')
         job.every_reboot()
         job = cron.new(command=command, comment='Run Robot Script')
