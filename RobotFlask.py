@@ -14,7 +14,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 killflag = Manager().dict()
 killflag["kill"] = False
-process: multiprocessing.Process = None
+process: multiprocessing.Process = multiprocessing.Process()
 lastTB = []
 blocklyActive = False
 
