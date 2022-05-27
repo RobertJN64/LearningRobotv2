@@ -28,7 +28,7 @@ raspbian install. Install this code with
 
 ```commandline
 cd Desktop
-git clone https://RobertJN64/LearningRobotv2`
+git clone https://RobertJN64/LearningRobotv2
 cd LearningRobotv2
 sudo python setup.py
 ```
