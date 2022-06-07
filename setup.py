@@ -14,7 +14,7 @@ def install():
     os.system("sudo raspi-config nonint do_i2c 0")
 
     print("Installing explorerhat lib")
-    os.system("sudo apt-get install python3-explorerhat")
+    os.system("sudo pip3 install explorerhat")
 
     print("Installing flask")
     os.system("sudo pip install flask")
