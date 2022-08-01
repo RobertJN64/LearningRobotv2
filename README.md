@@ -1,6 +1,14 @@
 # Learning Robot
 
-![Robot Picture](robot.jpg)
+![Robot Picture](images/robot.jpg)
+
+### Block Programming
+
+![Robot Picture](images/blocks.png)
+
+### Python Programming
+
+![Robot Picture](images/python.png)
 
 ## Hardware Setup
 

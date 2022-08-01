@@ -18,6 +18,7 @@ def install():
 
     print("Installing flask")
     os.system("sudo pip install flask")
+    os.system("sudo pip install cryptography")
 
     print("Installing hostapd")
     os.system('sudo apt install hostapd')
